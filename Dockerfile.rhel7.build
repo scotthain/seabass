@@ -12,7 +12,8 @@ RUN groupadd admin && \
   useradd -d /home/omnibus -U -s /bin/bash -m omnibus && \
   echo "omnibus ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/omnibus && \
   chmod 0440 /etc/sudoers.d/omnibus
-COPY --chown=omnibus:omnibus ./scripts/build_project.sh /home/omnibus/build_project.sh
+COPY ./scripts/build_project.sh /home/omnibus/build_project.sh
+RUN chown omnibus:omnibus /home/omnibus/build_project.sh
 COPY ./scripts/prepare_dirs.sh /tmp/prepare_dirs.sh
 RUN /tmp/prepare_dirs.sh
 USER omnibus
