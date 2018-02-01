@@ -1,0 +1,24 @@
+FROM ubuntu:14.04
+ENV TOOLCHAIN_NAME omnibus-toolchain
+ENV PROJECT_GIT_URL https://github.com/chef/omnibus-harmony.git
+ENV PROJECT_NAME harmony
+# ENV INSTALL_DIR /opt/$PROJECT_NAME
+RUN apt-get update -y && \
+  apt-get install -y \
+  autoconf binutils-doc bison build-essential flex gettext ncurses-dev sudo
+#  autoconf bison flex gcc gcc-c++ gettext glibc-static kernel-devel make m4 \
+#  ncurses-devel patch rpm-build rpm-sign sudo zlib-devel
+RUN curl -L https://omnitruck.chef.io/install.sh | sudo bash -s -- -P $TOOLCHAIN_NAME
+RUN groupadd admin && \
+  useradd -d /home/omnibus -U -s /bin/bash -m omnibus && \
+  echo "omnibus ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/omnibus && \
+  chmod 0440 /etc/sudoers.d/omnibus
+COPY ./scripts/build_project.sh /home/omnibus/build_project.sh
+RUN chown omnibus:omnibus /home/omnibus/build_project.sh
+COPY ./scripts/prepare_dirs.sh /tmp/prepare_dirs.sh
+RUN /tmp/prepare_dirs.sh
+USER omnibus
+ENV PATH /opt/$TOOLCHAIN_NAME/bin:/usr/local/bin:$PATH
+ENV SSL_CERT_FILE /opt/$TOOLCHAIN_NAME/embedded/ssl/certs/cacert.pem
+VOLUME /outputs
+ENTRYPOINT ["/bin/sh", "-c", "/home/omnibus/build_project.sh"]
