@@ -13,3 +13,4 @@ fi
 cd $OMNIBUS_DIR
 bundle install --without development
 bundle exec omnibus build $PROJECT_NAME -l debug --override cache_suffix:$PROJECT_NAME
+cp $OMNIBUS_DIR/pkg/* /outputs
