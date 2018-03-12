@@ -4,7 +4,6 @@ set -ex
 
 cd ~
 git clone $PROJECT_GIT_URL $PROJECT_NAME
-git checkout $PROJECT_BRANCH
 if [ -d /home/omnibus/$PROJECT_NAME/omnibus ]; then
   OMNIBUS_DIR=/home/omnibus/$PROJECT_NAME/omnibus
 else
@@ -12,6 +11,7 @@ else
 fi
 
 cd $OMNIBUS_DIR
+git checkout $PROJECT_BRANCH
 bundle install --without development
 bundle exec omnibus build $PROJECT_NAME -l debug --override cache_suffix:$PROJECT_NAME
 mkdir outputs
