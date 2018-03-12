@@ -14,5 +14,4 @@ cd $OMNIBUS_DIR
 git checkout $PROJECT_BRANCH
 bundle install --without development
 bundle exec omnibus build $PROJECT_NAME -l debug --override cache_suffix:$PROJECT_NAME
-mkdir outputs
-cp $OMNIBUS_DIR/pkg/* $OMNIBUS_DIR/outputs/
+cp $OMNIBUS_DIR/pkg/* /outputs/
