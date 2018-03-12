@@ -17,4 +17,5 @@ ENV PACKAGE_VERSION 0.0.0
 ENV PROJECT_NAME harmony
 ENV VERIFY_COMMAND ci/verify.sh
 VOLUME /outputs
+EXPOSE 9000
 ENTRYPOINT ["/bin/sh", "-c", "/home/omnibus/test_project.sh"]

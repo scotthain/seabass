@@ -4,7 +4,7 @@ set -ex
 
 mkdir -p /var/cache/omnibus
 chmod 777 /var/cache/omnibus
-projects=( angrychef chef harmony )
+projects=( angrychef chef harmony inspec opscode )
 for i in "${projects[@]}"
 do
   mkdir -p /opt/$i
