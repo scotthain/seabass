@@ -1,6 +1,7 @@
 FROM centos:6
 ENV TOOLCHAIN_NAME omnibus-toolchain
 ENV PROJECT_GIT_URL https://github.com/chef/omnibus-harmony.git
+ENV PROJECT_BRANCH master
 ENV PROJECT_NAME harmony
 RUN yum update -y && \
   yum install -y \
