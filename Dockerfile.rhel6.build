@@ -19,5 +19,4 @@ RUN /tmp/prepare_dirs.sh
 USER omnibus
 ENV PATH /opt/$TOOLCHAIN_NAME/bin:/usr/local/bin:$PATH
 ENV SSL_CERT_FILE /opt/$TOOLCHAIN_NAME/embedded/ssl/certs/cacert.pem
-RUN /home/omnibus/build_project.sh
 CMD ["/bin/bash"]
