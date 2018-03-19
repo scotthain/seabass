@@ -13,4 +13,4 @@ fi
 cd $OMNIBUS_DIR
 git checkout $PROJECT_BRANCH
 bundle install --without development
-bundle exec omnibus build $PROJECT_NAME --override cache_suffix:$PROJECT_NAME $OMNIBUS_BUILD_OPTIONS
+bundle exec omnibus build $PROJECT_NAME $OMNIBUS_BUILD_OPTIONS
